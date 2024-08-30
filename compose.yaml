@@ -1,0 +1,12 @@
+name: chatbot
+services:
+  app:
+    container_name: image-classifier-demo-container
+    image: image-classifier-demo:latest
+    build:
+      context: .
+    ports:
+      - '127.0.0.1:8501:8501'
+    network_mode: "host"
+    volumes:
+      - ./:/app
