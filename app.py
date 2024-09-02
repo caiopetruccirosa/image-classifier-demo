@@ -41,11 +41,12 @@ if upload:
     scores_df = pd.DataFrame.from_dict(scores)
 
     top_5 = scores_df.sort_values(by="score", ascending=False).head(5)
+    top_prob = top_5.iloc[0]['score']
 
     fig = px.bar(top_5, x="score", y="label", orientation='h')
 
     st.subheader(f"Predicted label:")
-    st.markdown(f"**{top_5.iloc[0]['label']}** with {top_5.iloc[0]['score']}% certainty.")
+    st.markdown(f"**{top_5.iloc[0]['label']}** with {top_prob*100:.2f}% certainty.")
 
     st.subheader("Predicted top 5 probabilities:")
     st.plotly_chart(fig, theme="streamlit")
