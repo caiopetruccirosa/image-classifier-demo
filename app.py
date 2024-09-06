@@ -98,12 +98,15 @@ if selected_model is not None:
         top_5 = scores_df.sort_values(by="score").tail(5)
         top_5['score'] = top_5['score'] * 100
 
-        fig = px.bar(top_5, x="score", y="label", orientation='h', title="Top 5 classes possíveis")
+        top_5['Probabilidade'] = top_5['score']
+        top_5['Categoria'] = top_5['label']
+
+        fig = px.bar(top_5, x="Probabilidade", y="Categoria", orientation='h', title="Top 5 categorias possíveis")
 
         col1, col2 = st.columns(2)
         with col1:
             st.subheader(f"Classificação:")
-            st.markdown(f"Classe \"**{top_label}**\" com {top_prob*100:.2f}% de probabilidade.")
+            st.markdown(f"Categoria \"**{top_label}**\" com {top_prob*100:.2f}% de probabilidade.")
             st.plotly_chart(fig, theme="streamlit")
 
         with col2:
